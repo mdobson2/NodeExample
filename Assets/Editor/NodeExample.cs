@@ -5,6 +5,9 @@ using UnityEditor;
 
 public class NodeExample : EditorWindow {
 
+    public Texture2D bckg;
+    public GUISkin gSkin;
+
     public List<NodeBaseClass> myNodes = new List<NodeBaseClass>();
 
     public int nodeAttachID = -1;
@@ -14,8 +17,14 @@ public class NodeExample : EditorWindow {
         GetWindow<NodeExample>();
     }
 
+    void OnEnable()
+    {
+        bckg = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Editor/Artwork/grid.jpg", typeof(Texture2D));
+    }
+
     public void OnGUI()
     {
+        GUI.DrawTexture(new Rect(0, 0, this.position.width, this.position.height), bckg);
         for (int i = 0; i < myNodes.Count; i++)
         {
             for (int j = 0; j < myNodes[i].linkedNodes.Count; j++)
