@@ -12,6 +12,7 @@ public class NodeB : NodeBaseClass {
 
     public override void DrawGUI(int winID)
     {
+        GUILayout.Label(myString);
         GUILayout.Label(id.ToString());
         GUILayout.Label("Node : B");
         foreach (NodeBaseClass n in linkedNodes)

@@ -20,18 +20,23 @@ public class NodeExample : EditorWindow {
         {
             for (int j = 0; j < myNodes[i].linkedNodes.Count; j++)
             {
-                DrawNodeCurve(myNodes[i].rect, myNodes[i].linkedNodes[j].rect);
+                Color color = Color.black;
+                if(myNodes[i].linkedNodes[j].GetType() == typeof(NodeB))
+                {
+                    color = Color.cyan;
+                }
+                DrawNodeCurve(myNodes[i].rect, myNodes[i].linkedNodes[j].rect, color);
             }
         }
         if (GUILayout.Button("Node A"))
         {
-           myNodes.Add(new NodeA(new Rect(10,40,100,100),myNodes.Count));
+           myNodes.Add(new NodeA(new Rect(10,40,150,150),myNodes.Count));
            myNodes[myNodes.Count-1].closeFunction += RemoveNode;
             myNodes[myNodes.Count - 1].nodeEditor = this;
         }
         if (GUILayout.Button("Node B"))
         {
-            myNodes.Add(new NodeB(new Rect(110, 40, 100, 100), myNodes.Count));
+            myNodes.Add(new NodeB(new Rect(110, 40, 150, 150), myNodes.Count));
             myNodes[myNodes.Count-1].closeFunction += RemoveNode;
             myNodes[myNodes.Count - 1].nodeEditor = this;
         }
@@ -89,7 +94,7 @@ public class NodeExample : EditorWindow {
         nodeAttachID = -1;
     }
 
-    void DrawNodeCurve(Rect start, Rect end)
+    void DrawNodeCurve(Rect start, Rect end, Color color)
     {
         Vector3 startPos = new Vector3(start.x + start.width, start.y + (start.height / 2)+10, 0);
         Vector3 endPos = new Vector3(end.x, end.y + (end.height / 2)+ 10, 0);
@@ -98,7 +103,7 @@ public class NodeExample : EditorWindow {
         Color shadowCol = new Color(0, 0, 0, 0.06f);
 
        
-        Handles.DrawBezier(startPos, endPos, startTan, endTan, Color.black, null, 5);
+        Handles.DrawBezier(startPos, endPos, startTan, endTan, color, null, 5);
     }
 
 }

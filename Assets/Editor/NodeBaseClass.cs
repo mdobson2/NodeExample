@@ -13,6 +13,8 @@ public class NodeBaseClass : Editor {
     public NodeExample nodeEditor;
     public List<NodeBaseClass> linkedNodes = new List<NodeBaseClass>();
 
+    public string myString = "";
+
     public NodeBaseClass(Rect r, int ID)
     {
         id = ID;
@@ -20,7 +22,12 @@ public class NodeBaseClass : Editor {
     }
     public void BaseDraw()
     {
-       
+       if(GUILayout.Button("Edit"))
+        {
+            EditWindow eW = EditorWindow.GetWindow<EditWindow>();
+            eW.setNode(this);
+        }
+
         Color temp = GUI.backgroundColor;
         GUI.backgroundColor = Color.red;
 
